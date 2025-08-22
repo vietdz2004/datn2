@@ -1,0 +1,186 @@
+// Biến SCSS
+$nav-button-size: 40px;
+$dot-size: 10px;
+$active-dot-color: #333;
+$inactive-dot-color: #ccc;
+$border-radius: 12px;
+
+.sliderContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  margin: 20px auto;
+  overflow: hidden; // Quan trọng cho hiệu ứng trượt
+  border-radius: $border-radius;
+  border: 7px solid #ffffff;
+
+  // Nút điều hướng chỉ hiện khi hover
+  .navButton {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  &:hover .navButton {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+// Container chứa tất cả các ảnh
+.slidesWrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out; // Hiệu ứng trượt
+}
+
+.bannerImage {
+  width: 100%;
+  flex-shrink: 0; // Đảm bảo ảnh không bị co lại
+  display: block;
+  height: 365px;
+  object-fit: cover;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  width: $nav-button-size;
+  height: $nav-button-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+  &.prev {
+    left: 15px;
+  }
+
+  &.next {
+    right: 15px;
+  }
+}
+
+// Style cho các dấu chấm điều hướng
+.dotsContainer {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: $dot-size;
+  height: $dot-size;
+  border-radius: 50%;
+  background-color: $inactive-dot-color;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &.active {
+    background-color: $active-dot-color;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .sliderContainer {
+    border-radius: 8px;
+    
+    &::before {
+      content: '';
+      display: block;
+      padding-top: 56.25%; // 16:9 aspect ratio for mobile
+    }
+  }
+
+  .slidesWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .navButton {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .prev {
+    left: 12px;
+  }
+
+  .next {
+    right: 12px;
+  }
+
+  .dotsContainer {
+    bottom: 12px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sliderContainer {
+    border-radius: 6px;
+    
+    &::before {
+      padding-top: 56.25%; // Keep 16:9 for small mobile
+    }
+  }
+
+  .navButton {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .prev {
+    left: 8px;
+  }
+
+  .next {
+    right: 8px;
+  }
+
+  .dotsContainer {
+    bottom: 8px;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+// Animation for auto-playing slider (optional)
+@keyframes slideshow {
+  0%, 33.33% { transform: translateX(0%); }
+  33.34%, 66.66% { transform: translateX(-100%); }
+  66.67%, 100% { transform: translateX(-200%); }
+}
+
+// Add this class to enable auto-play
+.autoplay .slidesWrapper {
+  animation: slideshow 9s infinite;
+}
+
+// Pause animation on hover
+.sliderContainer:hover .slidesWrapper {
+  animation-play-state: paused;
+}

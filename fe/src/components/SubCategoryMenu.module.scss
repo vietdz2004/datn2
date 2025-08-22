@@ -1,0 +1,127 @@
+// Subcategory Mega Menu Styles
+.navItemWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.productCount {
+  font-size: 0.7rem;
+  color: #999;
+  font-weight: 400;
+  margin-left: 4px;
+  opacity: 0.8;
+}
+
+.subCategoryDropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  z-index: 1000;
+  min-width: 300px;
+  max-width: 400px;
+  overflow: hidden;
+  margin-top: 8px;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid white;
+  }
+}
+
+.subCategoryHeader {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.subCategoryTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 4px 0;
+}
+
+.subCategoryCount {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+}
+
+.subCategoryList {
+  padding: 12px 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.subCategoryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  margin: 2px 0;
+  
+  &:hover {
+    background-color: #f8f9fa;
+    color: #e91e63;
+    transform: translateX(4px);
+  }
+}
+
+.subCategoryName {
+  font-size: 0.85rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+.subCategoryProductCount {
+  font-size: 0.7rem;
+  color: #999;
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.subCategoryFooter {
+  background: #f8f9fa;
+  padding: 12px 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.viewAllButton {
+  text-align: center;
+  color: #e91e63;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: #e91e63;
+    color: white;
+    transform: scale(1.02);
+  }
+} 

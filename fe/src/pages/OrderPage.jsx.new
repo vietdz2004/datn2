@@ -1,0 +1,494 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { 
+  Container, 
+  Typography, 
+  Card, 
+  CardContent, 
+  Chip, 
+  Button, 
+  Box, 
+  Divider,
+  CircularProgress,
+  Alert,
+  Grid,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Snackbar,
+  Rating
+} from '@mui/material';
+import { 
+  ShoppingBag, 
+  LocalShipping, 
+  CheckCircle, 
+  Cancel, 
+  Schedule,
+  Visibility,
+  Star,
+  Receipt,
+  Pause,
+  Error,
+  MoreHoriz,
+  Payment
+} from '@mui/icons-material';
+import { orderAPI } from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
+import ReviewForm from '../components/ReviewForm';
+
+const OrderPage = () => {
+  // State declarations
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showOrderDetail, setShowOrderDetail] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
+  const [orderToCancel, setOrderToCancel] = useState(null);
+  const [cancelLoading, setCancelLoading] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // Hooks
+  const { user, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  // Helper functions
+  const getStatusInfo = (status) => {
+    const statusMap = {
+      'cho_xu_ly': {
+        label: 'Chờ xử lý',
+        color: 'info',
+        icon: <Schedule fontSize="small" />,
+        canCancel: true,
+        description: 'Đơn hàng mới tạo, chờ admin xác nhận'
+      },
+      'da_xac_nhan': {
+        label: 'Đã xác nhận',
+        color: 'primary',
+        icon: <CheckCircle fontSize="small" />,
+        canCancel: false,
+        description: 'Đơn đã được admin xác nhận'
+      },
+      'dang_chuan_bi': {
+        label: 'Đang chuẩn bị',
+        color: 'primary',
+        icon: <LocalShipping fontSize="small" />,
+        canCancel: false,
+        description: 'Đơn đang được đóng gói, chờ giao'
+      },
+      'dang_giao': {
+        label: 'Đang giao',
+        color: 'info',
+        icon: <LocalShipping fontSize="small" />,
+        canCancel: false,
+        description: 'Đơn đang được vận chuyển đến bạn'
+      },
+      'da_giao': {
+        label: 'Đã giao',
+        color: 'success',
+        icon: <CheckCircle fontSize="small" />,
+        canCancel: false,
+        canReview: true,
+        description: 'Đơn đã giao thành công'
+      },
+      'huy_boi_khach': {
+        label: 'Đã huỷ (Khách)',
+        color: 'error',
+        icon: <Cancel fontSize="small" />,
+        canCancel: false,
+        description: 'Bạn đã huỷ đơn này'
+      },
+      'huy_boi_admin': {
+        label: 'Đã huỷ (Admin)',
+        color: 'error',
+        icon: <Cancel fontSize="small" />,
+        canCancel: false,
+        description: 'Admin đã huỷ đơn này'
+      },
+      'khach_bom_hang': {
+        label: 'Bị bom hàng',
+        color: 'error',
+        icon: <Error fontSize="small" />,
+        canCancel: false,
+        description: 'Đơn bị bom hàng (khách từ chối nhận)'
+      },
+    };
+    return statusMap[status] || {
+      label: status,
+      color: 'default',
+      icon: null,
+      canCancel: false,
+      description: 'Trạng thái không xác định'
+    };
+  };
+
+  // Format currency
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(amount || 0);
+  };
+
+  // Format date
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Không xác định';
+    return new Date(dateString).toLocaleDateString('vi-VN', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  // Authentication check
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Load orders
+  useEffect(() => {
+    const fetchOrders = async () => {
+      if (!user?.id_NguoiDung || !isAuthenticated) {
+        setError('Không tìm thấy thông tin người dùng');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        setError('');
+        const response = await orderAPI.getUserOrders(user.id_NguoiDung);
+        const ordersData = Array.isArray(response.data) ? response.data : [];
+        setOrders(ordersData);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+        setError('Không thể tải danh sách đơn hàng');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (isAuthenticated && user?.id_NguoiDung) {
+      fetchOrders();
+    }
+  }, [user?.id_NguoiDung, isAuthenticated]);
+
+  // Handle view order details
+  const handleViewDetails = (order) => {
+    setSelectedOrder(order);
+    setShowOrderDetail(true);
+  };
+
+  // Handle cancel order
+  const handleCancelOrder = (order) => {
+    setOrderToCancel(order);
+    setShowCancelDialog(true);
+  };
+
+  // Confirm order cancellation
+  const confirmCancelOrder = async () => {
+    if (!orderToCancel) return;
+    
+    try {
+      setCancelLoading(true);
+      const response = await orderAPI.cancel(orderToCancel.id_DonHang);
+      
+      if (response.data.success) {
+        const ordersResponse = await orderAPI.getUserOrders(user.id_NguoiDung);
+        const ordersData = Array.isArray(ordersResponse.data) ? ordersResponse.data : [];
+        setOrders(ordersData);
+        
+        setShowCancelDialog(false);
+        setOrderToCancel(null);
+        setNotificationMessage('Đã hủy đơn hàng thành công');
+        setShowNotification(true);
+      } else {
+        setNotificationMessage(response.data.message);
+        setShowNotification(true);
+      }
+    } catch (error) {
+      console.error('Error canceling order:', error);
+      setNotificationMessage(
+        error.response?.data?.message || 
+        'Không thể hủy đơn hàng. Vui lòng thử lại sau.'
+      );
+      setShowNotification(true);
+    } finally {
+      setCancelLoading(false);
+    }
+  };
+
+  // Handle review product
+  const handleReviewProduct = (product, orderId) => {
+    setSelectedProduct({
+      ...product,
+      orderId: orderId,
+      id_SanPham: product.id_SanPham || 1
+    });
+    setShowReviewForm(true);
+  };
+
+  // Handle close review form
+  const handleCloseReviewForm = () => {
+    setShowReviewForm(false);
+    setSelectedProduct(null);
+  };
+
+  // Handle review submitted
+  const handleReviewSubmitted = async (reviewData) => {
+    try {
+      if (!selectedProduct || !user?.id_NguoiDung) {
+        throw new Error('Thiếu thông tin cần thiết để đánh giá');
+      }
+
+      const updatedOrders = orders.map(order => {
+        if (order.id_DonHang === selectedProduct.orderId) {
+          return {
+            ...order,
+            OrderDetails: order.OrderDetails.map(item => ({
+              ...item,
+              isReviewed: item.id_SanPham === selectedProduct.id_SanPham ? true : item.isReviewed,
+              danhGiaSao: item.id_SanPham === selectedProduct.id_SanPham ? reviewData.rating : item.danhGiaSao,
+              noiDungDanhGia: item.id_SanPham === selectedProduct.id_SanPham ? reviewData.content : item.noiDungDanhGia
+            }))
+          };
+        }
+        return order;
+      });
+      
+      setOrders(updatedOrders);
+      setShowReviewForm(false);
+      setSelectedProduct(null);
+      setNotificationMessage('Cảm ơn bạn đã đánh giá sản phẩm!');
+      setShowNotification(true);
+    } catch (error) {
+      console.error('Error updating review status:', error);
+      setNotificationMessage(error.message || 'Có lỗi xảy ra khi cập nhật đánh giá');
+      setShowNotification(true);
+    }
+  };
+
+  if (loading) {
+    return (
+      <Container maxWidth="lg" sx={{ py: 4, textAlign: 'center' }}>
+        <CircularProgress size={40} />
+        <Typography variant="h6" sx={{ mt: 2 }}>
+          Đang tải đơn hàng...
+        </Typography>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+        <Button 
+          variant="contained" 
+          onClick={() => window.location.reload()}
+        >
+          Thử lại
+        </Button>
+      </Container>
+    );
+  }
+
+  return (
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Snackbar
+        open={showNotification}
+        autoHideDuration={4000}
+        onClose={() => setShowNotification(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert 
+          onClose={() => setShowNotification(false)} 
+          severity="success"
+          sx={{ width: '100%' }}
+        >
+          {notificationMessage}
+        </Alert>
+      </Snackbar>
+
+      <Box sx={{ mb: 4 }}>
+        <Typography 
+          variant="h4" 
+          component="h1" 
+          sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 2 }}
+        >
+          <ShoppingBag />
+          Đơn hàng của tôi
+        </Typography>
+      </Box>
+
+      {orders.length === 0 ? (
+        <Paper sx={{ p: 4, textAlign: 'center' }}>
+          <Typography variant="h6" color="textSecondary">
+            Bạn chưa có đơn hàng nào
+          </Typography>
+          <Button 
+            variant="contained" 
+            onClick={() => navigate('/products')}
+            sx={{ mt: 2 }}
+          >
+            Bắt đầu mua sắm
+          </Button>
+        </Paper>
+      ) : (
+        <Grid container spacing={3}>
+          {orders.map((order) => {
+            const statusInfo = getStatusInfo(order.trangThaiDonHang);
+            
+            return (
+              <Grid item xs={12} key={order.id_DonHang}>
+                <Card>
+                  <CardContent>
+                    <Box sx={{ 
+                      display: 'flex', 
+                      justifyContent: 'space-between', 
+                      alignItems: 'center',
+                      mb: 2 
+                    }}>
+                      <Typography variant="h6">
+                        Đơn hàng #{order.maDonHang || order.id_DonHang}
+                      </Typography>
+                      <Chip 
+                        label={statusInfo.label}
+                        color={statusInfo.color}
+                        icon={statusInfo.icon}
+                      />
+                    </Box>
+
+                    <Typography variant="body2" sx={{ mb: 2 }}>
+                      Ngày đặt: {formatDate(order.ngayDatHang)}
+                    </Typography>
+
+                    <Divider sx={{ my: 2 }} />
+
+                    <List>
+                      {order.OrderDetails?.map((item, index) => (
+                        <ListItem key={index}>
+                          <ListItemAvatar>
+                            <Avatar 
+                              variant="square"
+                              src={item.hinhAnh ? `http://localhost:5002/images/products/${item.hinhAnh}` : '/no-image.png'}
+                              sx={{ width: 80, height: 80 }}
+                            />
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={item.tenSp}
+                            secondary={`${formatCurrency(item.giaBan)} x ${item.soLuong}`}
+                          />
+                          {statusInfo.canReview && !item.isReviewed && (
+                            <Button
+                              variant="outlined"
+                              startIcon={<Star />}
+                              onClick={() => handleReviewProduct(item, order.id_DonHang)}
+                            >
+                              Đánh giá
+                            </Button>
+                          )}
+                        </ListItem>
+                      ))}
+                    </List>
+
+                    <Divider sx={{ my: 2 }} />
+
+                    <Box sx={{ 
+                      display: 'flex', 
+                      justifyContent: 'space-between',
+                      alignItems: 'center' 
+                    }}>
+                      <Typography variant="h6">
+                        Tổng tiền: {formatCurrency(order.tongTien)}
+                      </Typography>
+                      <Box>
+                        <Button
+                          variant="outlined"
+                          startIcon={<Visibility />}
+                          onClick={() => handleViewDetails(order)}
+                          sx={{ mr: 1 }}
+                        >
+                          Chi tiết
+                        </Button>
+                        {statusInfo.canCancel && (
+                          <Button
+                            variant="outlined"
+                            color="error"
+                            startIcon={<Cancel />}
+                            onClick={() => handleCancelOrder(order)}
+                          >
+                            Hủy đơn
+                          </Button>
+                        )}
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
+      )}
+
+      <Dialog
+        open={showCancelDialog}
+        onClose={() => setShowCancelDialog(false)}
+      >
+        <DialogTitle>Xác nhận hủy đơn hàng</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Bạn có chắc chắn muốn hủy đơn hàng này không?
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={() => setShowCancelDialog(false)}
+          >
+            Không
+          </Button>
+          <Button 
+            onClick={confirmCancelOrder}
+            color="error"
+            variant="contained"
+            disabled={cancelLoading}
+          >
+            {cancelLoading ? 'Đang xử lý...' : 'Xác nhận hủy'}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {selectedProduct && (
+        <ReviewForm
+          open={showReviewForm}
+          onClose={handleCloseReviewForm}
+          productId={selectedProduct.id_SanPham}
+          productName={selectedProduct.tenSp}
+          userHasPurchased={true}
+          onReviewSubmitted={handleReviewSubmitted}
+          orderId={selectedProduct.orderId}
+          userId={user?.id_NguoiDung}
+          isOrderReview={true}
+        />
+      )}
+    </Container>
+  );
+};
+
+export default OrderPage;

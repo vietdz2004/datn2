@@ -1,0 +1,304 @@
+// SearchHero.module.scss - Styling cho SearchHero component
+
+.searchHeroWrap {
+  background: linear-gradient(135deg, #ffeaa7, #fab1a0, #fd79a8);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><circle cx="40" cy="40" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+    animation: floatPattern 20s linear infinite;
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatPattern {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-80px); }
+}
+
+.searchHeroContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+// TITLE STYLING
+.searchTitle {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 16px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-size: 2.5rem !important;
+
+  @media (max-width: 768px) {
+    font-size: 2rem !important;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.8rem !important;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.titleIcon {
+  font-size: 2.5rem !important;
+  color: #fff;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+
+  @media (max-width: 768px) {
+    font-size: 2rem !important;
+  }
+}
+
+.searchSubtitle {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 40px !important;
+  font-size: 1.1rem !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+
+  @media (max-width: 768px) {
+    font-size: 1rem !important;
+    margin-bottom: 30px !important;
+  }
+}
+
+// SEARCH BOX STYLING
+.searchBoxWrap {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.searchInput {
+  background: white;
+  border-radius: 50px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+  }
+
+  :global(.MuiOutlinedInput-root) {
+    border-radius: 50px !important;
+    padding: 8px 24px;
+    font-size: 1.1rem;
+    height: 60px;
+
+    @media (max-width: 768px) {
+      height: 55px;
+      font-size: 1rem;
+      padding: 6px 20px;
+    }
+
+    :global(.MuiOutlinedInput-notchedOutline) {
+      border: none;
+    }
+
+    &:hover :global(.MuiOutlinedInput-notchedOutline) {
+      border: none;
+    }
+
+    &:global(.Mui-focused) :global(.MuiOutlinedInput-notchedOutline) {
+      border: 2px solid #e91e63;
+    }
+  }
+
+  .MuiInputBase-input {
+    &::placeholder {
+      color: #999;
+      opacity: 1;
+    }
+  }
+}
+
+.searchIcon {
+  color: #e91e63;
+  font-size: 1.5rem !important;
+}
+
+// SUGGESTIONS DROPDOWN
+.suggestionsDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-radius: 16px !important;
+  box-shadow: 0 16px 64px rgba(0,0,0,0.15) !important;
+  margin-top: 8px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  max-height: 400px;
+  overflow-y: auto;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 3px;
+
+    &:hover {
+      background: #ccc;
+    }
+  }
+}
+
+.suggestionSection {
+  padding: 16px 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #f5f5f5;
+  }
+}
+
+.sectionTitle {
+  padding: 0 16px 8px;
+  color: #666 !important;
+  font-weight: 600 !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem !important;
+}
+
+.suggestionItem {
+  transition: all 0.2s ease;
+  border-radius: 8px !important;
+  margin: 0 8px;
+
+  &:hover {
+    background: #f8f9fa !important;
+    transform: translateX(4px);
+  }
+}
+
+.chipContainer {
+  padding: 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.searchChip {
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #e91e63 !important;
+    color: white !important;
+  }
+}
+
+.noResults {
+  padding: 24px 16px;
+  text-align: center;
+  color: #999;
+}
+
+// QUICK ACTIONS
+.quickActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.quickActionsLabel {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500 !important;
+  margin-right: 8px;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
+
+.quickActionChip {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: white !important;
+    color: #e91e63 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+}
+
+// RESPONSIVE DESIGN
+@media (max-width: 768px) {
+  .searchHeroWrap {
+    padding: 40px 16px;
+  }
+
+  .searchHeroContainer {
+    max-width: 100%;
+  }
+
+  .suggestionsDropdown {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchHeroWrap {
+    padding: 30px 12px;
+  }
+
+  .searchInput .MuiOutlinedInput-root {
+    height: 50px;
+    padding: 4px 16px;
+  }
+
+  .quickActions {
+    gap: 8px;
+  }
+
+  .quickActionChip {
+    font-size: 0.8rem !important;
+    padding: 4px 12px !important;
+  }
+} 

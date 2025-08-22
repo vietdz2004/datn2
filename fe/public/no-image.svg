@@ -1,0 +1,8 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#f8f9fa"/>
+  <circle cx="200" cy="160" r="40" stroke="#e91e63" stroke-width="3" fill="none"/>
+  <path d="M200 140 L180 180 L220 180 Z" fill="#e91e63"/>
+  <path d="M200 200 Q180 220 160 200 Q140 180 160 160 Q180 140 200 160 Q220 140 240 160 Q260 180 240 200 Q220 220 200 200" stroke="#e91e63" stroke-width="2" fill="none"/>
+  <text x="200" y="280" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="16">Hình ảnh không tìm thấy</text>
+  <text x="200" y="320" text-anchor="middle" fill="#999" font-family="Arial, sans-serif" font-size="12">Hoashop</text>
+</svg> 

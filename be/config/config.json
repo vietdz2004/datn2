@@ -1,0 +1,23 @@
+{
+    "development": {
+      "username": "root",
+      "password": "YOUR_DB_PASSWORD",
+      "database": "hoanghe",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "test": {
+      "username": "root",
+      "password": "YOUR_DB_PASSWORD",
+      "database": "hoanghe_test",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "root",
+      "password": "YOUR_DB_PASSWORD",
+      "database": "hoanghe",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    }
+  }

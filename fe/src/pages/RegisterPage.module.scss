@@ -1,0 +1,318 @@
+.registerContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 280px);
+  background: white;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.banner {
+  background: #e91e63;
+  color: white;
+  text-align: center;
+  padding: 8px 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  background: white;
+}
+
+.registerFormColumn {
+  flex: 1;
+  max-width: none;
+  padding: 20px 30px;
+  background: white;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar {
+  width: 200px;
+  background: white;
+  padding: 20px 15px;
+  border-left: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+.pageTitle {
+  font-size: 1.5rem !important;
+  font-weight: 400 !important;
+  color: #333 !important;
+  margin-bottom: 12px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.pageDescription {
+  color: #666 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5;
+  margin-bottom: 25px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.formTitle {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  color: #666 !important;
+  margin-bottom: 18px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 5px;
+}
+
+.fieldLabel {
+  width: 100px;
+  font-size: 0.85rem !important;
+  color: #333 !important;
+  font-family: Arial, sans-serif !important;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.required {
+  color: #e91e63 !important;
+  margin-right: 2px;
+}
+
+.textField {
+  flex: 1;
+  margin-bottom: 0 !important;
+  max-width: 800px;
+  width: 500px;
+  
+  .MuiOutlinedInput-root {
+    border-radius: 3px;
+    background: #fff;
+    font-size: 0.85rem;
+    min-height: 38px;
+    
+    .MuiOutlinedInput-notchedOutline {
+      border-color: #ccc;
+      border-width: 1px;
+    }
+    
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: #999;
+    }
+    
+    &.Mui-focused .MuiOutlinedInput-notchedOutline {
+      border-color: #666;
+      border-width: 1px;
+    }
+  }
+  
+  .MuiInputLabel-root {
+    font-size: 0.85rem;
+    color: #666;
+    font-family: Arial, sans-serif;
+    
+    &.Mui-focused {
+      color: #666;
+    }
+  }
+  
+  .MuiInputBase-input {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+}
+
+.submitButton {
+  background: #e91e63 !important;
+  color: white !important;
+  padding: 10px 25px !important;
+  border-radius: 3px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  font-size: 0.9rem !important;
+  margin-top: 15px !important;
+  align-self: flex-end;
+  width: auto !important;
+  min-height: 38px !important;
+  
+  &:hover {
+    background: #d81159 !important;
+  }
+}
+
+.checkbox {
+  margin: 12px 0 !important;
+  
+  .MuiCheckbox-root {
+    padding: 8px !important;
+    
+    &.Mui-checked {
+      color: #e91e63 !important;
+    }
+  }
+  
+  .MuiTypography-root {
+    font-size: 0.85rem !important;
+    color: #666 !important;
+  }
+}
+
+.link {
+  color: #e91e63 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  
+  &:hover {
+    text-decoration: underline !important;
+  }
+}
+
+.alert {
+  margin-bottom: 15px !important;
+  border-radius: 3px !important;
+  font-size: 0.9rem !important;
+}
+
+.errorText {
+  font-size: 0.75rem !important;
+  margin-top: 3px !important;
+  margin-left: 112px !important;
+  margin-bottom: 8px !important;
+}
+
+// Sidebar styles
+.sidebarTitle {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 18px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.sidebarLink {
+  display: block;
+  padding: 8px 0;
+  color: #666 !important;
+  text-decoration: none !important;
+  font-size: 0.9rem !important;
+  border-bottom: 1px solid #f0f0f0;
+  font-family: Arial, sans-serif !important;
+  
+  &:hover {
+    color: #e91e63 !important;
+  }
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+
+
+// Responsive
+@media (max-width: 1024px) {
+  .banner {
+    padding: 6px 15px;
+    font-size: 0.7rem;
+  }
+  
+  .sidebar {
+    width: 190px;
+    padding: 15px 10px;
+    border-left: 1px solid #ddd;
+  }
+  
+  .registerFormColumn {
+    padding: 15px 25px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .textField {
+    max-width: 420px;
+    width: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner {
+    padding: 6px 15px;
+    font-size: 0.7rem;
+  }
+  
+  .registerContainer {
+    flex-direction: column;
+  }
+  
+  .mainContent {
+    flex-direction: column;
+  }
+  
+  .registerFormColumn {
+    padding: 15px 20px;
+    border-right: none;
+    max-width: none;
+  }
+  
+  .sidebar {
+    width: 100%;
+    order: -1;
+    padding: 15px 20px;
+    border-left: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .textField {
+    max-width: none;
+    width: 100%;
+  }
+  
+  .pageTitle {
+    font-size: 1.3rem !important;
+  }
+  
+  .formTitle {
+    font-size: 0.9rem !important;
+  }
+  
+  .form {
+    gap: 15px;
+  }
+  
+  .formRow {
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .fieldLabel {
+    width: auto;
+    margin-top: 0;
+    font-size: 0.8rem !important;
+  }
+  
+  .textField .MuiInputBase-input {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .errorText {
+    margin-left: 0 !important;
+    font-size: 0.7rem !important;
+  }
+} 
+

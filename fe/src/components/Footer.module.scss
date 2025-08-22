@@ -1,0 +1,240 @@
+// Footer.module.scss - Following UI/UX Standards
+
+.footer {
+  background-color: #1a202c;
+  color: #e2e8f0;
+  padding: 4rem 0 2rem;
+  margin-top: auto;
+  border-top: 1px solid #2d3748;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    
+    // Responsive breakpoints following mobile-first approach
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 0 1rem;
+    }
+    
+    @media (min-width: 1024px) {
+      gap: 4rem;
+    }
+  }
+  
+  .section {
+    // Consistent spacing using 8px grid system
+    margin-bottom: 1rem;
+    
+    .title {
+      color: #ffffff;
+      font-size: 1.125rem; // 18px
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+      position: relative;
+      
+      // Accessible focus indicator
+      &:focus-visible {
+        outline: 2px solid #3182ce;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      
+      // Visual hierarchy with subtle underline
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #3182ce;
+        border-radius: 1px;
+      }
+    }
+    
+    p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      color: #cbd5e0;
+      font-size: 0.9rem; // 14px
+      max-width: 300px; // Optimal reading length
+      
+      // Last paragraph spacing
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    .links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        margin-bottom: 0.75rem;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        a {
+          color: #cbd5e0;
+          text-decoration: none;
+          font-size: 0.9rem;
+          transition: all 0.2s ease-in-out;
+          display: inline-block;
+          padding: 0.25rem 0;
+          border-radius: 4px;
+          position: relative;
+          
+          // Minimum touch target size (44px)
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+          
+          // Hover state
+          &:hover {
+            color: #90cdf4;
+            transform: translateX(4px);
+          }
+          
+          // Focus state for accessibility
+          &:focus-visible {
+            outline: 2px solid #3182ce;
+            outline-offset: 2px;
+            color: #90cdf4;
+          }
+          
+          // Active state
+          &:active {
+            transform: translateX(2px);
+          }
+        }
+      }
+    }
+  }
+  
+  .copyright {
+    border-top: 1px solid #2d3748;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    text-align: center;
+    
+    p {
+      margin: 0;
+      color: #a0aec0;
+      font-size: 0.875rem; // 14px
+      line-height: 1.5;
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background-color: #0f172a;
+    border-top-color: #1e293b;
+    
+    .section {
+      .title {
+        color: #f8fafc;
+        
+        &::after {
+          background-color: #60a5fa;
+        }
+      }
+      
+      p {
+        color: #cbd5e0;
+      }
+      
+      .links li a {
+        color: #cbd5e0;
+        
+        &:hover,
+        &:focus-visible {
+          color: #93c5fd;
+        }
+      }
+    }
+    
+    .copyright {
+      border-top-color: #1e293b;
+      
+      p {
+        color: #94a3b8;
+      }
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .footer {
+    border-top-width: 2px;
+    
+    .section {
+      .title::after {
+        height: 3px;
+      }
+      
+      .links li a {
+        &:focus-visible {
+          outline-width: 3px;
+        }
+      }
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .footer {
+    .section .links li a {
+      transition: none;
+      
+      &:hover {
+        transform: none;
+      }
+      
+      &:active {
+        transform: none;
+      }
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .footer {
+    background: white !important;
+    color: black !important;
+    border-top: 2px solid black;
+    
+    .section {
+      .title {
+        color: black !important;
+      }
+      
+      p,
+      .links li a {
+        color: black !important;
+      }
+      
+      .links li a {
+        text-decoration: underline;
+      }
+    }
+    
+    .copyright p {
+      color: black !important;
+    }
+  }
+}

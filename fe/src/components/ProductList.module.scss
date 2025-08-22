@@ -1,0 +1,469 @@
+.gridContainer {
+  padding: 30px 0;
+  
+  // Mobile padding
+  @media (max-width: 768px) {
+    padding: 20px 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 16px 0;
+  }
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 0;
+  
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px; // Giảm gap cho 2 cột mobile
+  }
+  
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+.gridItem {
+  display: flex;
+  height: 420px;
+  
+  // Mobile touch improvements
+  @media (max-width: 768px) {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0px;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+    
+    .cardImage {
+      transform: scale(1.02);
+    }
+    
+    .detailBtn {
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      transform: translateY(-1px);
+    }
+    
+    .productName {
+      color: #ff69b4;
+    }
+  }
+  
+  // Mobile touch feedback for cards
+  @media (max-width: 768px) {
+    &:active {
+      transform: translateY(-2px) scale(0.98);
+      transition: transform 0.1s ease;
+    }
+  }
+}
+
+.imgBox {
+  position: relative;
+  overflow: hidden;
+  width: 261px;
+  height: 327px;
+  background: transparent;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    border: 1px solid rgba(255, 105, 180, 0.3);
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  // Mobile touch feedback
+  @media (max-width: 768px) {
+    &:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease;
+    }
+  }
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.discountBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-weight: 700;
+  font-size: 0.75rem;
+  background: linear-gradient(135deg, #ff1493, #dc143c);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  pointer-events: none; // Không block click events
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  white-space: nowrap;
+}
+
+.cardContent {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  position: relative;
+  text-align: center;
+}
+
+.productName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin: 0;
+  transition: all 0.3s ease;
+  min-height: 36px;
+  text-align: center;
+  
+  &:hover {
+    color: #ff69b4;
+  }
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 4px 0;
+  flex-wrap: wrap;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 11px;
+  font-weight: 400;
+  order: 2;
+  text-transform: uppercase;
+}
+
+.salePrice {
+  color: #ff69b4;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  order: 1;
+  text-transform: uppercase;
+}
+
+.detailBtn {
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  margin: 8px auto 0 auto;
+  
+  &:hover {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    transform: translateY(-1px);
+    box-shadow: none;
+    letter-spacing: 0.8px;
+  }
+  
+  &:active {
+    transform: translateY(0);
+    transition: all 0.1s ease;
+  }
+  
+  &:disabled {
+    background: linear-gradient(135deg, #ccc, #999);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    
+    &:hover {
+      transform: none;
+      box-shadow: none;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+// Loading animation
+.loadingCard {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// Empty state
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  
+  h3 {
+    margin-bottom: 12px;
+    color: #333;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+}
+
+// Responsive improvements
+@media (max-width: 1200px) {
+  .gridItem {
+    height: 380px;
+  }
+  
+  .imgBox {
+    width: 220px;
+    height: 275px;
+  }
+  
+  .cardContent {
+    padding: 10px 14px;
+  }
+  
+  .productName {
+    font-size: 13px;
+  }
+  
+  .salePrice {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gridItem {
+    height: 360px;
+    margin-bottom: 4px; // Thêm space giữa các rows
+  }
+  
+  .imgBox {
+    width: 200px;
+    height: 250px;
+  }
+  
+  .productName {
+    font-size: 13px;
+    min-height: 32px;
+  }
+  
+  .salePrice {
+    font-size: 14px;
+  }
+  
+  .oldPrice {
+    font-size: 10px;
+  }
+  
+  .detailBtn {
+    padding: 6px 14px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gridItem {
+    height: 320px; // Transition size cho màn hình vừa
+  }
+  
+  .imgBox {
+    width: 160px;
+    height: 200px;
+  }
+  
+  .productName {
+    font-size: 12px;
+    min-height: 30px;
+  }
+  
+  .salePrice {
+    font-size: 13px;
+  }
+  
+  .detailBtn {
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gridItem {
+    height: 300px; // Giảm từ 340px để vừa 2 sản phẩm
+    margin-bottom: 6px; // Thêm space cho mobile
+  }
+  
+  .imgBox {
+    width: 140px; // Giảm từ 180px để vừa 2 cột
+    height: 175px; // Giảm từ 225px
+  }
+  
+  .cardContent {
+    padding: 6px 8px; // Giảm padding
+  }
+  
+  .productName {
+    font-size: 11px; // Giảm từ 12px
+    min-height: 28px; // Giảm từ 30px
+    line-height: 1.2;
+  }
+  
+  .priceBlock {
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin: 2px 0; // Giảm margin
+  }
+  
+  .salePrice {
+    font-size: 12px; // Giảm từ 13px
+    order: 1;
+  }
+  
+  .oldPrice {
+    font-size: 8px; // Giảm từ 9px
+    order: 2;
+  }
+  
+  .detailBtn {
+    padding: 4px 8px; // Giảm padding
+    font-size: 9px; // Giảm từ 10px
+    letter-spacing: 0.2px;
+    margin: 4px auto 0 auto; // Giảm margin
+  }
+  
+  .discountBadge {
+    top: 6px; // Giảm từ 10px
+    right: 6px;
+    padding: 2px 4px; // Giảm padding
+    font-size: 0.65rem; // Giảm font
+    min-width: 32px; // Giảm min-width
+    border-radius: 6px; // Giảm border-radius
+  }
+}
+
+// Responsive cho màn hình rất nhỏ (iPhone SE, etc.)
+@media (max-width: 360px) {
+  .gridItem {
+    height: 280px; // Còn nhỏ hơn nữa
+    margin-bottom: 8px; // Thêm space cho màn hình nhỏ
+  }
+  
+  .imgBox {
+    width: 120px; // Giảm thêm
+    height: 150px;
+  }
+  
+  .productName {
+    font-size: 10px;
+    min-height: 26px;
+    -webkit-line-clamp: 2; // Chỉ hiển thị 2 dòng
+  }
+  
+  .salePrice {
+    font-size: 11px;
+  }
+  
+  .oldPrice {
+    font-size: 7px;
+  }
+  
+  .detailBtn {
+    padding: 3px 6px;
+    font-size: 8px;
+  }
+  
+  .discountBadge {
+    top: 4px;
+    right: 4px;
+    padding: 1px 3px;
+    font-size: 0.55rem;
+    min-width: 28px;
+    border-radius: 4px;
+  }
+} 

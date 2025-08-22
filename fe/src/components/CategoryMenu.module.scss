@@ -1,0 +1,437 @@
+@use "sass:map";
+
+/* === DESIGN SYSTEM === */
+$primary: #e91e63;
+$secondary: #f06292;
+$accent: #fce4ec;
+$text-dark: #1a202c;
+$text-medium: #4a5568;
+$text-light: #a0aec0;
+$border: #e2e8f0;
+$white: #ffffff;
+
+$space: (
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 32px
+);
+
+$text: (
+  xs: 0.75rem,
+  sm: 0.875rem,
+  base: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem
+);
+
+$radius: (
+  sm: 6px,
+  md: 8px,
+  lg: 12px
+);
+
+$shadow: (
+  sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+  md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1)
+);
+
+/* === BASE MENU === */
+.menuWrap {
+  background: $white;
+  border-top: 2px solid $accent;
+  box-shadow: map.get($shadow, sm);
+  position: relative;
+  z-index: 100;
+  transition: all 0.3s ease;
+  
+  &.compact {
+    .menuContainer {
+      padding: 0 map.get($space, md);
+    }
+    
+    .menuBtn {
+      padding: map.get($space, sm) map.get($space, md);
+      font-size: map.get($text, sm);
+    }
+  }
+}
+
+.menuContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 map.get($space, lg);
+}
+
+/* === DESKTOP MENU === */
+.menuList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: map.get($space, sm);
+}
+
+.menuItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.menuBtn {
+  padding: map.get($space, md) map.get($space, lg);
+  color: $text-dark;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: map.get($text, base);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: map.get($radius, md);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    background: $accent;
+    color: $primary;
+  }
+}
+
+
+
+.subMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background: $white;
+  min-width: 200px;
+  box-shadow: map.get($shadow, lg);
+  border-radius: map.get($radius, lg);
+  list-style: none;
+  margin: 0;
+  padding: map.get($space, sm) 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border-top: 2px solid $primary;
+}
+
+.menuItem:hover .subMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.subMenuItem {
+  padding: map.get($space, sm) map.get($space, lg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: $text-medium;
+  font-size: map.get($text, sm);
+  
+  &:hover {
+    background: $accent;
+    color: $primary;
+    padding-left: map.get($space, xl);
+  }
+}
+
+/* === MOBILE MENU === */
+.hamburgerOnly {
+  display: none;
+}
+
+.hamburgerBtn {
+  background: none;
+  border: none;
+  padding: map.get($space, sm);
+  cursor: pointer;
+  border-radius: map.get($radius, md);
+  transition: background 0.2s ease;
+  
+  &:hover {
+    background: $accent;
+  }
+  
+  svg {
+    width: 24px;
+    height: 24px;
+    
+    rect {
+      fill: $primary;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+.menuOverlay {
+  display: none;
+}
+
+.menuMobilePanel {
+  display: none;
+}
+
+.menuMobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: map.get($space, lg);
+  border-bottom: 1px solid $border;
+  background: $white;
+  border-radius: map.get($radius, lg) 0 0 0;
+}
+
+.menuMobileTitle {
+  font-size: map.get($text, lg);
+  font-weight: 700;
+  color: $primary;
+  letter-spacing: 1px;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: $primary;
+  cursor: pointer;
+  padding: map.get($space, sm);
+  border-radius: 50%;
+  transition: background 0.2s ease;
+  
+  &:hover {
+    background: $accent;
+  }
+}
+
+.menuMobileList {
+  list-style: none;
+  margin: 0;
+  padding: map.get($space, md) 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.menuMobileItem {
+  border-bottom: 1px solid $border;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.menuMobileBtn {
+  width: 100%;
+  font-size: map.get($text, base);
+  font-weight: 600;
+  color: $text-dark;
+  padding: map.get($space, lg);
+  background: none;
+  border: none;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: $accent;
+    color: $primary;
+  }
+}
+
+.menuMobileSub {
+  max-height: 0;
+  overflow: hidden;
+  background: rgba($primary, 0.02);
+  transition: max-height 0.3s ease;
+  border-left: 3px solid $primary;
+  margin-left: map.get($space, lg);
+}
+
+.menuMobileSubOpen {
+  max-height: 300px;
+}
+
+.menuMobileSubItem {
+  color: $text-medium;
+  font-size: map.get($text, sm);
+  font-weight: 500;
+  padding: map.get($space, md) map.get($space, lg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba($primary, 0.1);
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    background: $accent;
+    color: $primary;
+    padding-left: map.get($space, xl);
+  }
+}
+
+
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .menuWrap {
+    padding: map.get($space, xs) 0; // Giảm padding cho gọn hơn
+  }
+  
+  .menuList {
+    display: none;
+  }
+  
+  .hamburgerOnly {
+    display: flex;
+    padding: map.get($space, sm); // Giảm từ md xuống sm
+  }
+  
+  .hamburgerBtn {
+    padding: map.get($space, xs); // Giảm padding button
+    
+    svg {
+      width: 20px; // Giảm từ 24px xuống 20px
+      height: 20px;
+    }
+  }
+  
+  .menuOverlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1100;
+    transition: all 0.3s ease;
+  }
+  
+  .menuMobilePanel {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85vw;
+    max-width: 300px; // Giảm từ 320px xuống 300px
+    height: 100vh;
+    background: $white;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: map.get($radius, lg) 0 0 map.get($radius, lg);
+    z-index: 1200;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .menuMobilePanelOpen {
+    transform: translateX(0);
+  }
+  
+  .menuMobileHeader {
+    padding: map.get($space, md); // Giảm từ lg xuống md
+  }
+  
+  .menuMobileTitle {
+    font-size: map.get($text, base); // Giảm từ lg xuống base
+  }
+  
+  .menuMobileBtn {
+    padding: map.get($space, md); // Giảm từ lg xuống md
+    font-size: map.get($text, sm); // Giảm từ base xuống sm
+  }
+  
+  .menuMobileSubItem {
+    padding: map.get($space, sm) map.get($space, md); // Giảm padding
+    font-size: map.get($text, xs); // Giảm từ sm xuống xs
+  }
+}
+
+@media (max-width: 480px) {
+  .menuWrap {
+    padding: 2px 0; // Còn gọn hơn nữa
+  }
+  
+  .hamburgerOnly {
+    padding: map.get($space, xs); // Giảm padding hơn nữa
+  }
+  
+  .hamburgerBtn {
+    padding: 2px; // Giảm padding button
+    
+    svg {
+      width: 18px; // Giảm từ 20px xuống 18px
+      height: 18px;
+    }
+  }
+  
+  .menuMobilePanel {
+    width: 100vw;
+    max-width: 100vw;
+  }
+  
+  .menuMobileHeader {
+    padding: map.get($space, sm); // Giảm từ md xuống sm
+  }
+  
+  .menuMobileTitle {
+    font-size: map.get($text, sm); // Giảm từ base xuống sm
+  }
+  
+  .menuMobileBtn {
+    font-size: map.get($text, xs); // Giảm từ sm xuống xs
+    padding: map.get($space, sm); // Giảm từ md xuống sm
+  }
+  
+  .menuMobileSubItem {
+    padding: map.get($space, xs) map.get($space, sm); // Giảm padding hơn nữa
+    font-size: 0.7rem; // Nhỏ hơn xs
+  }
+  
+  .closeBtn {
+    padding: map.get($space, xs); // Giảm padding nút đóng
+    font-size: 18px; // Giảm từ 24px
+  }
+}
+
+/* === LOADING STATES === */
+.loading {
+  background: $white;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid $accent;
+}
+
+.loadingText {
+  color: $primary;
+  font-size: map.get($text, sm);
+  font-weight: 500;
+}
+
+.errorText {
+  color: #d32f2f;
+  font-size: map.get($text, sm);
+  padding: map.get($space, lg);
+  text-align: center;
+}
+
+.emptyText {
+  color: $text-light;
+  font-size: map.get($text, sm);
+  padding: map.get($space, lg);
+  text-align: center;
+  font-style: italic;
+}
+

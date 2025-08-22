@@ -1,0 +1,295 @@
+/* ===== CATEGORY LIST - MINIMALIST DESIGN ===== */
+
+.category-list {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Loading & Error States */
+.category-list-loading,
+.category-list-error,
+.category-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.category-list-loading .loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #f0f0f0;
+  border-top: 2px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+.category-list-error .error-message {
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.retry-btn {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.retry-btn:hover {
+  background: #000;
+}
+
+/* Header */
+.category-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+
+.category-list-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.category-count {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Category Tree */
+.category-tree {
+  padding: 0;
+}
+
+.category-item {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.category-item:last-child {
+  border-bottom: none;
+}
+
+/* Parent Category */
+.parent-category {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: white;
+  transition: background-color 0.2s ease;
+}
+
+.parent-category:hover {
+  background: #fafafa;
+}
+
+.category-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333;
+  font-size: 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.expand-btn:hover:not(:disabled) {
+  background: #f0f0f0;
+}
+
+.expand-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.expand-btn.expanded {
+  transform: rotate(0deg);
+}
+
+.category-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.category-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.category-meta {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Category Actions */
+.category-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-add-sub,
+.btn-edit,
+.btn-delete {
+  padding: 6px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.btn-add-sub {
+  color: #333;
+  border-color: #333;
+}
+
+.btn-add-sub:hover {
+  background: #333;
+  color: white;
+}
+
+.btn-edit {
+  color: #666;
+}
+
+.btn-edit:hover {
+  background: #666;
+  color: white;
+  border-color: #666;
+}
+
+.btn-delete {
+  color: #999;
+}
+
+.btn-delete:hover {
+  background: #666;
+  color: white;
+  border-color: #666;
+}
+
+/* Sub Categories */
+.sub-categories {
+  background: #fafafa;
+  border-top: 1px solid #f0f0f0;
+}
+
+.sub-category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px 12px 56px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.sub-category-item:last-child {
+  border-bottom: none;
+}
+
+.sub-category-item:hover {
+  background: #f0f0f0;
+}
+
+.sub-category-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.sub-category-connector {
+  color: #ccc;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.sub-category-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sub-category-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.sub-category-meta {
+  font-size: 11px;
+  color: #999;
+}
+
+.sub-category-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.sub-category-actions .btn-edit,
+.sub-category-actions .btn-delete {
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .category-list-header {
+    padding: 12px 16px;
+  }
+  
+  .parent-category {
+    padding: 12px 16px;
+  }
+  
+  .category-actions {
+    gap: 4px;
+  }
+  
+  .btn-add-sub,
+  .btn-edit,
+  .btn-delete {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  
+  .sub-category-item {
+    padding: 10px 16px 10px 48px;
+  }
+} 

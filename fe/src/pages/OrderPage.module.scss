@@ -1,0 +1,518 @@
+// OrderPage.module.scss - Styles cho trang đơn hàng
+
+// Variables
+$primary-color: #1976d2;
+$secondary-color: #dc004e;
+$success-color: #2e7d32;
+$warning-color: #ed6c02;
+$error-color: #d32f2f;
+$info-color: #0288d1;
+
+$border-radius: 12px;
+$box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+$box-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Container styles
+.container {
+  padding: 2rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}
+
+// Header styles
+.header {
+  margin-bottom: 2rem;
+  
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+    font-weight: 600;
+    
+    .icon {
+      color: $primary-color;
+      font-size: 2rem;
+    }
+  }
+  
+  .subtitle {
+    color: #666;
+    font-size: 1.1rem;
+  }
+}
+
+// Empty state styles
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  
+  .icon {
+    font-size: 4rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    color: #888;
+    margin-bottom: 2rem;
+  }
+  
+  .actionButton {
+    background: linear-gradient(45deg, $primary-color, #42a5f5);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: $transition;
+    box-shadow: $box-shadow;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $box-shadow-hover;
+    }
+  }
+}
+
+// Order card styles
+.orderCard {
+  background: white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  transition: $transition;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $box-shadow-hover;
+  }
+  
+  .cardHeader {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    
+    .orderInfo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      
+      .orderNumber {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+      
+      .orderDate {
+        color: #666;
+        font-size: 0.9rem;
+      }
+    }
+    
+    .statusChip {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      
+      &.pending {
+        background: linear-gradient(45deg, $warning-color, #ff9800);
+        color: white;
+      }
+      
+      &.confirmed {
+        background: linear-gradient(45deg, $info-color, #2196f3);
+        color: white;
+      }
+      
+      &.shipping {
+        background: linear-gradient(45deg, $primary-color, #1976d2);
+        color: white;
+      }
+      
+      &.delivered {
+        background: linear-gradient(45deg, $success-color, #4caf50);
+        color: white;
+      }
+      
+      &.cancelled {
+        background: linear-gradient(45deg, $error-color, #f44336);
+        color: white;
+      }
+    }
+  }
+  
+  .cardContent {
+    padding: 1.5rem;
+  }
+}
+
+// Product list styles
+.productList {
+  .productItem {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f5f5f5;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .productImage {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-right: 1rem;
+      transition: $transition;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+    
+    .productInfo {
+      flex: 1;
+      
+      .productName {
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+      
+      .productDetails {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        
+        .detail {
+          color: #666;
+          font-size: 0.9rem;
+          
+          .label {
+            font-weight: 500;
+            color: #333;
+          }
+          
+          .value {
+            color: $primary-color;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    
+    .productActions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      
+      .reviewButton {
+        background: linear-gradient(45deg, #ff9800, #ff5722);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: $transition;
+        
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+        }
+      }
+    }
+  }
+}
+
+// Order summary styles
+.orderSummary {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: $border-radius;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  
+  .summaryHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    
+    .totalLabel {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    
+    .totalAmount {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: $primary-color;
+    }
+  }
+  
+  .actionButtons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    
+    .actionButton {
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: $transition;
+      border: 2px solid transparent;
+      
+      &.primary {
+        background: linear-gradient(45deg, $primary-color, #42a5f5);
+        color: white;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+        }
+      }
+      
+      &.secondary {
+        background: white;
+        color: $primary-color;
+        border-color: $primary-color;
+        
+        &:hover {
+          background: $primary-color;
+          color: white;
+          transform: translateY(-2px);
+        }
+      }
+      
+      &.danger {
+        background: white;
+        color: $error-color;
+        border-color: $error-color;
+        
+        &:hover {
+          background: $error-color;
+          color: white;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+// Dialog styles
+.dialog {
+  .dialogTitle {
+    background: linear-gradient(135deg, $primary-color, #42a5f5);
+    color: white;
+    padding: 1.5rem;
+    
+    h2 {
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+  
+  .dialogContent {
+    padding: 2rem;
+    
+    .infoGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .infoSection {
+        .sectionTitle {
+          font-weight: 600;
+          color: #1a1a1a;
+          margin-bottom: 1rem;
+          font-size: 1.1rem;
+        }
+        
+        .infoItem {
+          margin-bottom: 0.75rem;
+          
+          .label {
+            font-weight: 500;
+            color: #666;
+            margin-right: 0.5rem;
+          }
+          
+          .value {
+            color: #1a1a1a;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Loading and error states
+.loadingState {
+  text-align: center;
+  padding: 4rem 2rem;
+  
+  .spinner {
+    margin-bottom: 1rem;
+  }
+  
+  .loadingText {
+    color: #666;
+    font-size: 1.1rem;
+  }
+}
+
+.errorState {
+  text-align: center;
+  padding: 2rem;
+  
+  .errorIcon {
+    font-size: 3rem;
+    color: $error-color;
+    margin-bottom: 1rem;
+  }
+  
+  .errorMessage {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+  
+  .retryButton {
+    background: linear-gradient(45deg, $primary-color, #42a5f5);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: $transition;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .orderCard {
+    .cardHeader {
+      .orderInfo {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  }
+  
+  .productList {
+    .productItem {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      
+      .productImage {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+      
+      .productActions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+  }
+  
+  .orderSummary {
+    .actionButtons {
+      justify-content: center;
+      
+      .actionButton {
+        flex: 1;
+        min-width: 120px;
+      }
+    }
+  }
+}
+
+// Animation classes
+.fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Utility classes
+.textCenter {
+  text-align: center;
+}
+
+.mb1 { margin-bottom: 0.5rem; }
+.mb2 { margin-bottom: 1rem; }
+.mb3 { margin-bottom: 1.5rem; }
+.mb4 { margin-bottom: 2rem; }
+
+.mt1 { margin-top: 0.5rem; }
+.mt2 { margin-top: 1rem; }
+.mt3 { margin-top: 1.5rem; }
+.mt4 { margin-top: 2rem; }
+
+.p1 { padding: 0.5rem; }
+.p2 { padding: 1rem; }
+.p3 { padding: 1.5rem; }
+.p4 { padding: 2rem; }

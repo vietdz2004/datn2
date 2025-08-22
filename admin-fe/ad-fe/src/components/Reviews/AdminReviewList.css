@@ -1,0 +1,90 @@
+.review-table-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.review-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+.review-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.review-table th, .review-table td {
+  padding: 12px 8px;
+  font-size: 15px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #222;
+  background: #fff;
+}
+.review-table th {
+  font-weight: 600;
+  color: #111;
+  background: #f4f4f5;
+  border-bottom: 2px solid #d1d5db;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+.review-table th:last-child, .review-table td:last-child { border-right: none; }
+.review-table td { text-align: center; }
+.review-table td:first-child, .review-table th:first-child { text-align: left; }
+.review-table tr:hover td { background: #f3f4f6; transition: background 0.15s; }
+
+.status-badge {
+  display: inline-block;
+  min-width: 70px;
+  padding: 3px 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #222;
+  background: #e5e7eb;
+  border: 1px solid #d1d5db;
+  text-align: center;
+}
+.status-badge.active { background: #e5fbe6; color: #15803d; border-color: #bbf7d0; }
+.status-badge.locked { background: #f3f4f6; color: #b91c1c; border-color: #fecaca; }
+.status-badge.suspended { background: #fef9c3; color: #b45309; border-color: #fde68a; }
+
+.action-btn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1px solid #222;
+  color: #222;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s, border 0.15s;
+}
+.action-btn:hover {
+  background: #222;
+  color: #fff;
+  border: 1px solid #222;
+}
+
+@media (max-width: 900px) {
+  .review-table-container { border-radius: 0; box-shadow: none; padding: 12px 2px; }
+  .review-table th, .review-table td { padding: 8px 4px; font-size: 13px; }
+}
+@media (max-width: 600px) {
+  .review-table-container { font-size: 12px; padding: 4px 0; }
+  .review-table th, .review-table td { padding: 6px 2px; font-size: 12px; }
+  .review-table th, .review-table td { min-width: 80px; }
+  .review-table th:last-child, .review-table td:last-child { min-width: 100px; }
+  .review-table { font-size: 12px; }
+} 

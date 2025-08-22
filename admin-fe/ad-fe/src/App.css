@@ -1,0 +1,375 @@
+/* ===== RESET & BASE ===== */
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f8f9fa;
+}
+
+/* ===== ADMIN LAYOUT SYSTEM ===== */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* ===== SIDEBAR ===== */
+.admin-sidebar {
+  width: 250px;
+  background: white;
+  border-right: 1px solid #dee2e6;
+  box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.admin-logo {
+  padding: 20px 24px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #007bff;
+  border-bottom: 1px solid #dee2e6;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.admin-logo:hover {
+  color: #0056b3;
+}
+
+.admin-menu {
+  list-style: none;
+  padding: 16px 0;
+  margin: 0;
+  flex: 1;
+}
+
+.admin-menu-item {
+  margin: 0;
+}
+
+.admin-menu-item a {
+  display: block;
+  padding: 12px 24px;
+  color: #495057;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.admin-menu-item a:hover {
+  background: #f8f9fa;
+  color: #007bff;
+  border-left-color: #007bff;
+}
+
+.admin-menu-item a.active {
+  background: #e3f2fd;
+  color: #007bff;
+  border-left-color: #007bff;
+}
+
+/* ===== MAIN CONTENT ===== */
+.admin-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px;
+  min-height: 100vh;
+}
+
+.admin-header {
+  background: white;
+  border-bottom: 1px solid #dee2e6;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-header span {
+  font-size: 16px;
+  color: #495057;
+  font-weight: 500;
+}
+
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #495057;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  margin-right: 12px;
+}
+
+.mobile-menu-btn:hover {
+  background: #f8f9fa;
+}
+
+.admin-logout {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-logout:hover {
+  background: #c82333;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 0;
+  background: #f8f9fa;
+  min-height: calc(100vh - 65px);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .admin-sidebar {
+    width: 280px;
+  }
+  
+  .admin-content {
+    margin-left: 280px;
+  }
+  
+  .admin-header {
+    padding: 20px 40px;
+  }
+  
+  .admin-logo {
+    padding: 24px 32px;
+    font-size: 20px;
+  }
+  
+  .admin-menu-item a {
+    padding: 14px 32px;
+    font-size: 15px;
+  }
+}
+
+/* Tablet (768px - 1199px) */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .admin-sidebar {
+    width: 220px;
+  }
+  
+  .admin-content {
+    margin-left: 220px;
+  }
+  
+  .admin-header {
+    padding: 16px 24px;
+  }
+  
+  .admin-logo {
+    padding: 20px 20px;
+    font-size: 16px;
+  }
+  
+  .admin-menu-item a {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Mobile (767px and below) */
+@media (max-width: 767px) {
+  .admin-sidebar {
+    width: 250px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .admin-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  
+  .admin-content {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .admin-header {
+    padding: 12px 16px;
+  }
+  
+  .admin-main {
+    min-height: calc(100vh - 57px);
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+/* Hide mobile menu button on desktop */
+@media (min-width: 768px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+/* Small Mobile (480px and below) */
+@media (max-width: 480px) {
+  .admin-header {
+    padding: 10px 12px;
+  }
+  
+  .admin-header span {
+    font-size: 14px;
+  }
+  
+  .admin-logout {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .admin-logo {
+    padding: 16px 20px;
+    font-size: 16px;
+  }
+  
+  .admin-menu-item a {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* ===== LOGIN PAGE ===== */
+.admin-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  padding: 20px;
+}
+
+.admin-login-form {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-login-form h2 {
+  margin: 0 0 20px 0;
+  text-align: center;
+  color: #212529;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.admin-login-form input {
+  padding: 12px 16px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.admin-login-form input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+.admin-login-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-login-form button:hover {
+  background: #0056b3;
+}
+
+.admin-login-form .error {
+  color: #dc3545;
+  font-size: 14px;
+  text-align: center;
+  background: #f8d7da;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+}
+
+/* Mobile Login Form */
+@media (max-width: 480px) {
+  .admin-login-form {
+    padding: 24px;
+  }
+  
+  .admin-login-form h2 {
+    font-size: 20px;
+  }
+  
+  .admin-login-form input,
+  .admin-login-form button {
+    font-size: 14px;
+  }
+}

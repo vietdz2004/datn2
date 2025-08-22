@@ -1,0 +1,507 @@
+// CSS cho trang chi tiết sản phẩm - Design hiện đại với Pink Theme
+// Thiết kế đẹp phù hợp với FlowerCorner branding
+
+@use "sass:map";
+
+/* === DESIGN SYSTEM === */
+$primary: #e91e63;
+$secondary: #f06292; 
+$accent: #fce4ec;
+$text-dark: #1a202c;
+$text-medium: #4a5568;
+$text-light: #a0aec0;
+$border: #e2e8f0;
+$bg: #f8fafc;
+$white: #ffffff;
+
+$space: (
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 32px,
+  2xl: 48px
+);
+
+$text: (
+  xs: 0.75rem,
+  sm: 0.875rem,
+  base: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem,
+  2xl: 1.5rem,
+  3xl: 1.875rem
+);
+
+$radius: (
+  sm: 6px,
+  md: 8px,
+  lg: 12px
+);
+
+$shadow: (
+  sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+  md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1)
+);
+
+/* === BASE LAYOUT === */
+.detailWrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: map.get($space, xl) map.get($space, lg);
+  background: $bg;
+  min-height: 100vh;
+}
+
+/* === BREADCRUMBS === */
+.breadcrumbWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: map.get($space, xl);
+  padding: map.get($space, md) 0;
+  border-bottom: 1px solid $border;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: map.get($space, sm);
+  font-size: map.get($text, sm);
+}
+
+.breadcrumbLink {
+  text-decoration: none;
+  color: $text-medium;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  
+  &:hover { color: $primary; }
+}
+
+.backBtn {
+  background: $white;
+  color: $text-dark;
+  border: 1px solid $border;
+  border-radius: map.get($radius, md);
+  padding: map.get($space, sm) map.get($space, md);
+  font-weight: 500;
+  font-size: map.get($text, sm);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: $primary;
+    color: $white;
+    border-color: $primary;
+  }
+}
+
+/* === PRODUCT GRID === */
+.productGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: map.get($space, 2xl);
+  margin-bottom: map.get($space, 2xl);
+  align-items: start;
+}
+
+/* === IMAGE SECTION === */
+.imageSection {
+  position: relative;
+}
+
+.mainImageWrap {
+  position: relative;
+  background: $white;
+  border: 1px solid $border;
+  border-radius: map.get($radius, lg);
+  overflow: hidden;
+  aspect-ratio: 1;
+  box-shadow: map.get($shadow, md);
+  transition: box-shadow 0.2s ease;
+  
+  &:hover { box-shadow: map.get($shadow, lg); }
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageActions {
+  position: absolute;
+  top: map.get($space, md);
+  right: map.get($space, md);
+  display: flex;
+  flex-direction: column;
+  gap: map.get($space, sm);
+  z-index: 10;
+}
+
+.favoriteBtn, 
+.shareBtn {
+  background: $white;
+  border: 1px solid $border;
+  width: 40px;
+  height: 40px;
+  border-radius: map.get($radius, md);
+  color: $text-medium;
+  transition: all 0.2s ease;
+  box-shadow: map.get($shadow, sm);
+  
+  &:hover {
+    background: $primary;
+    color: $white;
+    border-color: $primary;
+  }
+}
+
+.favoriteActive {
+  background: $primary;
+  color: $white;
+  border-color: $primary;
+}
+
+/* === PRODUCT INFO === */
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($space, lg);
+}
+
+.productName {
+  font-weight: 700;
+  color: $text-dark;
+  font-size: map.get($text, 3xl);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.ratingSection {
+  display: flex;
+  align-items: center;
+  gap: map.get($space, md);
+}
+
+/* === PRICE SECTION === */
+.priceSection {
+  display: flex;
+  align-items: baseline;
+  gap: map.get($space, md);
+  padding: map.get($space, lg);
+  background: $accent;
+  border-radius: map.get($radius, lg);
+  border: 1px solid $border;
+}
+
+.salePrice {
+  color: $primary;
+  font-weight: 700;
+  font-size: map.get($text, 3xl);
+}
+
+.oldPrice {
+  color: $text-light;
+  text-decoration: line-through;
+  font-size: map.get($text, lg);
+}
+
+.discountChip {
+  background: $primary;
+  color: $white;
+  font-size: map.get($text, xs);
+  border-radius: map.get($radius, sm);
+  padding: map.get($space, xs) map.get($space, sm);
+  font-weight: 600;
+}
+
+/* === DETAILS & INVENTORY === */
+.detailsSection {
+  color: $text-medium;
+  font-size: map.get($text, sm);
+  margin-bottom: map.get($space, sm);
+}
+
+.inventorySection {
+  display: inline-flex;
+  margin-bottom: map.get($space, lg);
+}
+
+.stockChip {
+  font-weight: 600;
+  border-radius: map.get($radius, md);
+  padding: map.get($space, xs) map.get($space, md);
+  font-size: map.get($text, sm);
+  border: none;
+}
+
+/* === QUANTITY CONTROLS === */
+.quantitySection {
+  display: flex;
+  align-items: center;
+  gap: map.get($space, md);
+  margin-bottom: map.get($space, lg);
+}
+
+.quantityLabel {
+  font-weight: 600;
+  color: $text-dark;
+  font-size: map.get($text, base);
+  min-width: 80px;
+}
+
+.quantityControls {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid $border;
+  border-radius: map.get($radius, md);
+  overflow: hidden;
+  background: $white;
+}
+
+.quantityBtn {
+  min-width: 36px;
+  height: 36px;
+  border: none;
+  background: $white;
+  color: $text-dark;
+  font-weight: 600;
+  font-size: map.get($text, lg);
+  transition: background 0.2s ease;
+  
+  &:hover { background: $accent; }
+  &:not(:last-child) { border-right: 1px solid $border; }
+}
+
+.quantityValue {
+  min-width: 50px;
+  text-align: center;
+  font-weight: 600;
+  font-size: map.get($text, base);
+  color: $text-dark;
+  background: $white;
+  border: none;
+  padding: 0 map.get($space, sm);
+}
+
+/* === ACTION BUTTONS === */
+.actionSection {
+  display: flex;
+  gap: map.get($space, md);
+  margin-top: map.get($space, lg);
+}
+
+.addToCartBtn,
+.orderNowBtn {
+  flex: 1;
+  height: 48px;
+  font-weight: 600;
+  border-radius: map.get($radius, md);
+  text-transform: none;
+  font-size: map.get($text, base);
+  transition: all 0.2s ease;
+  border: 1px solid;
+}
+
+.addToCartBtn {
+  background: $white;
+  color: $primary;
+  border-color: $primary;
+  
+  &:hover {
+    background: $primary;
+    color: $white;
+  }
+  
+  &:disabled {
+    background: $white;
+    color: $text-light;
+    border-color: $border;
+  }
+}
+
+.orderNowBtn {
+  background: $primary;
+  color: $white;
+  border-color: $primary;
+  
+  &:hover {
+    background: $secondary;
+    border-color: $secondary;
+  }
+  
+  &:disabled {
+    background: $text-light;
+    color: $white;
+    border-color: $text-light;
+  }
+}
+
+/* === SECTIONS === */
+.shippingInfo {
+  background: $accent;
+  border: 1px solid $border;
+  border-radius: map.get($radius, md);
+  padding: map.get($space, md);
+  font-size: map.get($text, sm);
+  color: $text-medium;
+}
+
+.descriptionSection, 
+.reviewSection,
+.relatedSection {
+  margin: map.get($space, 2xl) 0;
+  padding: map.get($space, xl);
+  background: $white;
+  border: 1px solid $border;
+  border-radius: map.get($radius, lg);
+  box-shadow: map.get($shadow, sm);
+}
+
+.sectionTitle {
+  font-weight: 700;
+  color: $text-dark;
+  margin-bottom: map.get($space, lg);
+  font-size: map.get($text, 2xl);
+  padding-bottom: map.get($space, md);
+  border-bottom: 2px solid $border;
+}
+
+.description {
+  color: $text-medium;
+  line-height: 1.6;
+  font-size: map.get($text, base);
+}
+
+/* === REVIEWS === */
+.reviewItem {
+  padding: map.get($space, lg);
+  background: $accent;
+  border: 1px solid $border;
+  border-radius: map.get($radius, md);
+  margin-bottom: map.get($space, md);
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: map.get($space, md);
+}
+
+.reviewUser {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($space, xs);
+}
+
+.userName {
+  font-weight: 600;
+  color: $text-dark;
+  font-size: map.get($text, sm);
+}
+
+.reviewContent {
+  color: $text-medium;
+  line-height: 1.6;
+  font-size: map.get($text, sm);
+}
+
+.noReviews {
+  text-align: center;
+  padding: map.get($space, 2xl);
+  color: $text-medium;
+  font-size: map.get($text, base);
+}
+
+.reviewBtn {
+  margin-top: map.get($space, md);
+  border-radius: map.get($radius, md);
+  color: $primary;
+  border-color: $primary;
+  background: $white;
+  
+  &:hover {
+    background: $primary;
+    color: $white;
+  }
+}
+
+.relatedProductsGrid {
+  margin: map.get($space, lg) 0;
+}
+
+/* === UTILITIES === */
+.divider {
+  margin: map.get($space, lg) 0;
+  border-color: $border;
+  opacity: 1;
+}
+
+.availabilityInfo {
+  margin-top: map.get($space, sm);
+  font-size: map.get($text, sm);
+  color: $primary;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: map.get($space, 2xl);
+  color: $text-medium;
+  font-size: map.get($text, lg);
+}
+
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($space, md);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .productGrid {
+    grid-template-columns: 1fr;
+    gap: map.get($space, xl);
+  }
+  
+  .actionSection { flex-direction: column; }
+  
+  .quantitySection {
+    flex-wrap: wrap;
+    gap: map.get($space, md);
+  }
+  
+  .inventorySection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .breadcrumbWrap {
+    flex-direction: column;
+    gap: map.get($space, md);
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .detailWrap { padding: map.get($space, md); }
+  
+  .productName { font-size: map.get($text, 2xl); }
+  .salePrice { font-size: map.get($text, 2xl); }
+  
+  .descriptionSection, 
+  .reviewSection, 
+  .relatedSection {
+    padding: map.get($space, lg);
+    margin: map.get($space, xl) 0;
+  }
+  
+  .priceSection,
+  .quantitySection,
+  .inventorySection {
+    padding: map.get($space, md);
+  }
+} 

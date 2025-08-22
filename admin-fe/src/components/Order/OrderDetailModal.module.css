@@ -1,0 +1,183 @@
+.order-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.order-modal-content {
+  background: #fff;
+  border-radius: 12px;
+  min-width: 340px;
+  max-width: 520px;
+  width: 95%;
+  box-shadow: 0 4px 32px #0002;
+  padding: 28px 20px 20px 20px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.order-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+.order-modal-close:hover {
+  color: #222;
+}
+.order-modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #222;
+  text-align: center;
+}
+.order-modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 15px;
+  color: #333;
+}
+.order-modal-products-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.order-modal-products-table-wrapper {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  background: #fafbfc;
+}
+.order-modal-products-table {
+  width: 100%;
+  font-size: 15px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.order-modal-products-table th, .order-modal-products-table td {
+  padding: 8px 10px;
+  word-break: break-word;
+}
+.order-modal-products-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  border-bottom: 1.5px solid #e5e7eb;
+}
+.order-modal-products-table td {
+  border-bottom: 1px solid #f1f1f1;
+  vertical-align: middle;
+}
+.order-modal-products-table td img {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px #0001;
+  display: block;
+  margin: 0 auto;
+}
+.order-modal-products-table tr:hover {
+  background: #f8fafc;
+  transition: background 0.2s;
+}
+.order-modal-products-table td:nth-child(1) {
+  min-width: 44px;
+  max-width: 48px;
+  text-align: center;
+}
+.order-modal-products-table td:nth-child(2) {
+  min-width: 120px;
+}
+.order-modal-products-table td, .order-modal-products-table th {
+  text-align: center;
+}
+.order-modal-products-table td:nth-child(2), .order-modal-products-table th:nth-child(2) {
+  text-align: left;
+}
+.order-modal-actions {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.order-modal-actions-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.order-modal-actions-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.order-modal-select {
+  padding: 7px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+.order-modal-btn {
+  padding: 7px 16px;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.order-modal-btn-update {
+  background: #3b82f6;
+  color: #fff;
+}
+.order-modal-btn-update:hover {
+  background: #2563eb;
+}
+.order-modal-btn-approve {
+  background: #10b981;
+  color: #fff;
+}
+.order-modal-btn-approve:hover {
+  background: #059669;
+}
+.order-modal-btn-reject {
+  background: #ef4444;
+  color: #fff;
+}
+.order-modal-btn-reject:hover {
+  background: #b91c1c;
+}
+.order-modal-error {
+  color: #ef4444;
+  margin-top: 6px;
+  font-size: 14px;
+  text-align: left;
+}
+@media (max-width: 480px) {
+  .order-modal-content {
+    min-width: 0;
+    padding: 16px 4px 12px 4px;
+  }
+  .order-modal-title {
+    font-size: 18px;
+  }
+  .order-modal-info {
+    font-size: 13px;
+  }
+  .order-modal-btn {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+} 

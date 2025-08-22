@@ -1,0 +1,220 @@
+.loginContainer {
+  display: flex;
+  min-height: calc(100vh - 280px);
+  background: white;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  background: white;
+}
+
+.leftColumn {
+  width: 300px;
+  padding: 30px 25px;
+  background: #f4f4f4;
+  border-right: 1px solid #ddd;
+}
+
+.rightColumn {
+  flex: 1;
+  padding: 30px 25px;
+  background: white;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar {
+  width: 200px;
+  background: white;
+  padding: 30px 20px;
+}
+
+.sectionTitle {
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 15px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.sectionDescription {
+  color: #666 !important;
+  font-size: 0.85rem !important;
+  line-height: 1.5;
+  margin-bottom: 25px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.continueButton {
+  background: #e91e63 !important;
+  color: white !important;
+  padding: 8px 20px !important;
+  border-radius: 3px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  font-size: 0.9rem !important;
+  
+  &:hover {
+    background: #d81159 !important;
+  }
+}
+
+.formTitle {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 15px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.formSubtitle {
+  color: #666 !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 15px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.textField {
+  .MuiOutlinedInput-root {
+    border-radius: 3px;
+    background: #f8f8f8;
+    font-size: 0.9rem;
+    
+    .MuiOutlinedInput-notchedOutline {
+      border-color: #ddd;
+    }
+    
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: #bbb;
+    }
+    
+    &.Mui-focused .MuiOutlinedInput-notchedOutline {
+      border-color: #e91e63;
+      border-width: 1px;
+    }
+  }
+  
+  .MuiInputLabel-root {
+    font-size: 0.9rem;
+    color: #666;
+    
+    &.Mui-focused {
+      color: #e91e63;
+    }
+  }
+  
+  .MuiInputBase-input {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+.submitButton {
+  background: #e91e63 !important;
+  color: white !important;
+  padding: 10px 25px !important;
+  border-radius: 3px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  font-size: 0.9rem !important;
+  margin-top: 10px !important;
+  
+  &:hover {
+    background: #d81159 !important;
+  }
+}
+
+.forgotPassword {
+  color: #e91e63 !important;
+  text-decoration: none !important;
+  font-size: 0.85rem !important;
+  margin-top: 8px !important;
+  display: inline-block;
+  font-family: Arial, sans-serif !important;
+  
+  &:hover {
+    text-decoration: underline !important;
+  }
+}
+
+.link {
+  color: #e91e63 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  
+  &:hover {
+    text-decoration: underline !important;
+  }
+}
+
+.alert {
+  margin-bottom: 15px !important;
+  border-radius: 3px !important;
+  font-size: 0.9rem !important;
+}
+
+// Sidebar styles
+.sidebarTitle {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 15px !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.sidebarLink {
+  display: block;
+  padding: 8px 0;
+  color: #666 !important;
+  text-decoration: none !important;
+  font-size: 0.85rem !important;
+  border-bottom: 1px solid #eee;
+  font-family: Arial, sans-serif !important;
+  
+  &:hover {
+    color: #e91e63 !important;
+  }
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// Responsive
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+    padding: 20px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .loginContainer {
+    flex-direction: column;
+  }
+  
+  .mainContent {
+    flex-direction: column;
+  }
+  
+  .leftColumn,
+  .rightColumn {
+    padding: 20px;
+  }
+  
+  .sidebar {
+    width: 100%;
+    order: -1;
+    padding: 20px;
+  }
+} 

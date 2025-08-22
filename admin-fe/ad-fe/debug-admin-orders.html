@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Admin Orders API</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .result { margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 3px; white-space: pre-wrap; }
+        .error { background: #ffe6e6; color: #d00; }
+        .success { background: #e6ffe6; color: #060; }
+        button { padding: 8px 16px; margin: 5px; cursor: pointer; }
+        input, select { padding: 8px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test Admin Orders API</h1>
+    
+    <div class="test-section">
+        <h3>1. Basic API Test</h3>
+        <button onclick="testBasicAPI()">Test Basic Orders API</button>
+        <div id="basic-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>2. Search Test</h3>
+        <input type="text" id="search-input" placeholder="Nhập từ khóa tìm kiếm..." value="pham">
+        <button onclick="testSearch()">Test Search</button>
+        <div id="search-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>3. Status Filter Test</h3>
+        <select id="status-select">
+            <option value="">Tất cả trạng thái</option>
+            <option value="CHO_XAC_NHAN">Chờ xác nhận</option>
+            <option value="DA_XAC_NHAN">Đã xác nhận</option>
+            <option value="DANG_GIAO">Đang giao</option>
+            <option value="DA_GIAO">Đã giao</option>
+            <option value="DA_HUY">Đã hủy</option>
+            <option value="KHACH_YEU_CAU_HUY">Yêu cầu hủy</option>
+        </select>
+        <button onclick="testStatusFilter()">Test Status Filter</button>
+        <div id="status-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>4. Combined Test</h3>
+        <input type="text" id="combined-search" placeholder="Search..." value="pham">
+        <select id="combined-status">
+            <option value="">All Status</option>
+            <option value="CHO_XAC_NHAN">Chờ xác nhận</option>
+            <option value="DA_HUY">Đã hủy</option>
+        </select>
+        <button onclick="testCombined()">Test Combined Filters</button>
+        <div id="combined-result" class="result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5002/api';
+
+        async function makeRequest(url, resultElementId) {
+            const resultElement = document.getElementById(resultElementId);
+            resultElement.textContent = 'Loading...';
+            
+            try {
+                console.log('🔍 Making request to:', url);
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultElement.className = 'result success';
+                    resultElement.textContent = `✅ Success!\nStatus: ${response.status}\nData count: ${data.data?.length || 0}\nTotal: ${data.pagination?.totalItems || 0}\nResponse: ${JSON.stringify(data, null, 2)}`;
+                } else {
+                    resultElement.className = 'result error';
+                    resultElement.textContent = `❌ Error!\nStatus: ${response.status}\nMessage: ${data.message || 'Unknown error'}\nResponse: ${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultElement.className = 'result error';
+                resultElement.textContent = `❌ Network Error!\nError: ${error.message}\nMake sure backend server is running on port 5002`;
+            }
+        }
+
+        function testBasicAPI() {
+            const url = `${API_BASE}/admin/orders?page=1&limit=5`;
+            makeRequest(url, 'basic-result');
+        }
+
+        function testSearch() {
+            const searchTerm = document.getElementById('search-input').value;
+            const url = `${API_BASE}/admin/orders?search=${encodeURIComponent(searchTerm)}&page=1&limit=5`;
+            makeRequest(url, 'search-result');
+        }
+
+        function testStatusFilter() {
+            const status = document.getElementById('status-select').value;
+            const url = `${API_BASE}/admin/orders?trangThaiDonHang=${encodeURIComponent(status)}&page=1&limit=5`;
+            makeRequest(url, 'status-result');
+        }
+
+        function testCombined() {
+            const search = document.getElementById('combined-search').value;
+            const status = document.getElementById('combined-status').value;
+            let url = `${API_BASE}/admin/orders?page=1&limit=5`;
+            
+            if (search) url += `&search=${encodeURIComponent(search)}`;
+            if (status) url += `&trangThaiDonHang=${encodeURIComponent(status)}`;
+            
+            makeRequest(url, 'combined-result');
+        }
+
+        // Auto-test on page load
+        setTimeout(() => {
+            console.log('🚀 Auto-testing basic API...');
+            testBasicAPI();
+        }, 1000);
+    </script>
+</body>
+</html> 
